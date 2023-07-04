@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+// Command with correct relative path:
+// protoc --go_out=../internal/grpcServer/handlers/library --go_opt=paths=source_relative --go-grpc_out=../internal/grpcServer/handlers/library --go-grpc_opt=paths=source_relative library.proto
+
+package library;
+
+option go_package = "kvado_test_task/internal/grpcServer/handlers/library";
+
+service Librarian {
+  // Gets books by authors' names
+  rpc GetBooksByAuthor (BooksByAuthorRequest) returns (BooksByAuthorReply) {}
+
+  // Gets authors' names by book
+  rpc GetAuthorsByBook (AuthorsByBookRequest) returns (AuthorsByBookReply) {}
+}
+
+// The request message containing authors' names.
+message BooksByAuthorRequest {
+  string authorName = 1;
+}
+
+// The response message containing books' names
+message BooksByAuthorReply {
+  repeated string bookNames = 1;
+}
+
+// The request message containing authors' names.
+message AuthorsByBookRequest {
+  string bookName = 1;
+}
+
+// The response message containing books' names
+message AuthorsByBookReply {
+  repeated string authorNames = 1;
+}

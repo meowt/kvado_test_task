@@ -1,0 +1,26 @@
+env: "local"
+
+server:
+  address: ":9000"
+
+storage:
+  mysql:
+    root_password: secret
+    dbname: library
+    user: user
+    password: secret2
+    deploy:
+      - "CREATE TABLE IF NOT EXISTS books (
+             id INT PRIMARY KEY AUTO_INCREMENT,
+             name VARCHAR(255) NOT NULL UNIQUE
+         );"
+      - "CREATE TABLE IF NOT EXISTS authors (
+             id INT PRIMARY KEY AUTO_INCREMENT,
+             name VARCHAR(255) NOT NULL UNIQUE
+         );"
+      - "CREATE TABLE IF NOT EXISTS book_author_relations (
+             book_id INT,
+             author_id INT,
+             FOREIGN KEY (book_id) REFERENCES books (id),
+             FOREIGN KEY (author_id) REFERENCES authors (id)
+         );"
