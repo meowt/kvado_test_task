@@ -5,10 +5,10 @@ run: db-deploy
 
 #before "make test", do "make run" in another terminal
 test:
-	go clean -testcache && go test ./tests/
+	go clean -testcache && go test ./tests/ -v
 
 mock-test:
-	go clean -testcache && go test ./internal/grpcServer/
+	go clean -testcache && go test ./internal/grpcServer/ -v
 
 db-deploy:
 	docker-compose up -d database
